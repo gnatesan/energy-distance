@@ -33,10 +33,10 @@ sys.path.append(f'{os.getcwd()}/sentence_transformers_energydistance')
 
 import torch
 
-def check_available_gpus():
+"""def check_available_gpus():
     gpu_stats = []
     for i in range(torch.cuda.device_count()):
-        torch.cuda.set_device(i)
+        device = torch.device('cuda')	
         total_memory = torch.cuda.get_device_properties(i).total_memory
         allocated_memory = torch.cuda.memory_allocated(i)
         free_memory = total_memory - allocated_memory
@@ -45,11 +45,14 @@ def check_available_gpus():
     gpu_stats.sort(key=lambda x: x[1], reverse=True)
     return gpu_stats
 
-print(check_available_gpus())
+print(check_available_gpus())"""
+
+device = torch.device("cuda")
+print("Using device:", device)
 
 from sentence_transformers import SentenceTransformer, models
 
-for gpu_id, _ in check_available_gpus():
+"""for gpu_id, _ in check_available_gpus():
     try:
         ## Step 1: use an existing language model
         #word_embedding_model = models.Transformer('distilroberta-base')
@@ -65,7 +68,10 @@ for gpu_id, _ in check_available_gpus():
             torch.cuda.empty_cache()  # Clear memory cache
             continue
         else:
-            raise e
+            raise e"""
+
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
 
 from datasets import load_dataset
 
