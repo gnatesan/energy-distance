@@ -107,7 +107,7 @@ model.fit(train_objectives=[(train_dataloader, train_loss)],
 
 """Save output to `/models`"""
 
-model_name = 'all-MiniLM-L6-v2_TripletLoss'
+model_name = 'ed-all-MiniLM-L6-v2_TripletLoss'
 os.makedirs(f'{os.getcwd()}/../models', exist_ok=True)
 model_path = f'{os.getcwd()}/../models/{model_name}'
 model.save(model_path)
