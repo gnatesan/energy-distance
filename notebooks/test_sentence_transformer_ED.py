@@ -31,25 +31,28 @@ def energy_calc(x, y):
     return 2 * ed_sum / (M * N)
 
 def energy_distance(x, y):
-    # Shape of x: [batch_size, num_queries, query_dim]
-    # Shape of y: [batch_size, doc_dim]
 
-    batch_size, num_queries, query_dim = x.shape
+    num_queries = len(x) #number of queries
+    num_documents = len(y) #number of documents
 
-    #print("first shape", x[0].shape)
+    print("Num queries:", num_queries)
+    print("Num documents:", num_documents)
 
-    # Pre-calculate energy for all queries in the batch
+    #Pre-calculate energy for all queries
     ed_queries = torch.stack([ed_calc(query) for query in x])
 
-    # Initialize a tensor to store the energy distances
-    energy_distances = torch.zeros(batch_size)
+    #Create a tensor of shape M*N filled with zeros
+    tensor = torch.zeros(num_queries, num_documents)
 
-    for i in range(batch_size):
-        # Calculate energy distance between query i and document i
-        ed_query = ed_queries[i]
-        energy_distances[i] = energy_calc(x[i], y[i].reshape(1,-1)) - ed_query
+    for i in range(num_queries):
+      ed_query = ed_queries[i] #store energy calculation of query to improve runtime
+      for j in range(num_documents):
+        #print("Query: ", i)
+        #print("Document: ", j)
+        tensor[i][j] = energy_calc(x[i], y[j].reshape(1,-1)).item() - ed_query.item()
+    #print("Answer ", tensor.shape, type(tensor))
+    return tensor
 
-    return energy_distances.requires_grad_()
 
 
 # Define the sentence-transformers model name
