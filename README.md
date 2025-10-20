@@ -65,11 +65,11 @@ export HF_HOME=/gpfs/u/home/MSSV/MSSVntsn/barn\
 2. train_ddp.sh - Batch script to run model training on multiple GPUs. Make sure number of GPUs requested are properly set.
 3. inference_ED.sh - Batch script to run inference on an ED trained model. Can run on either entire dataset or subset based on query lengths.
 4. inference_CosSim.sh Batch script to run inference on a CosSim trained model. Can run on either entire dataset or subset based on query lengths.
-5. train_sbert_latest_2.py - Python script to run model training on a single GPU. Uses ir_evaluator to evaluate on a dev set after each epoch of training and only saves the best model, make sure ir_evaluator is enabled.
-6. train_sbert_ddp_2.py - Python script to run model training on multiple GPUs using PyTorch DDP. Currently does not use an ir_evaluator to evaluate on a dev set after each epoch of training.
+5. train_sbert_latest_2.py - Python script to run model training on a BEIR dataset. Runs on a single GPU. Uses ir_evaluator to evaluate on a dev set after each epoch of training and only saves the best model, make sure ir_evaluator is enabled.
+6. train_sbert_ddp_2.py - Python script to run model training on multiple GPUs using PyTorch DDP on a BEIR dataset. Currently does not use an ir_evaluator to evaluate on a dev set after each epoch of training.
 7. train_sbert_ddp_coir.py - Python script to run model training for CodeSearchNet-CCR from COIR benchmark. Correctly preprocesses the 6 different languages in the dataset (go, python, java, javascript, ruby, php). Runs on multiple GPUs, no ir_evaluator used for dev set evaluation.
 8. train_sbert_ddp_coir_1epoch.py - Python script to load a saved model checkpoint and run model training for CodeSearchNet-CCR from COIR benchmark. Correctly preprocesses the 6 different languages in the dataset (go, python, java, javascript, ruby, php). Runs on multiple GPUs, no ir_evaluator used for dev set evaluation.
-9. train_sbert_ddp_coir_python.py - Python script run model training for only one programming language in CodeSearchNet-CCR from COIR benchmark. Language used for training is python but that can be changed. Runs on multiple GPUs, no ir_evaluator used for dev set evaluation.
+9. train_sbert_ddp_coir_python.py - Python script run model training for only one programming language in CodeSearchNet-CCR from COIR benchmark. Language used for training is set to python but that can be changed. Runs on multiple GPUs, no ir_evaluator used for dev set evaluation.
 10. eval_dataset.py - Python script to run inference on entire BEIR dataset.
 11. eval_dataset_subset_length.py - Python script to run inference on subset of BEIR dataset based on query lengths.
 
